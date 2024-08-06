@@ -51,7 +51,6 @@ export default {
       },
       async authorize(credentials, request) {
         try {
-          console.log('came here', credentials)
           const response = await fetch(
             `${env.PAYLOAD_URL}/api/${COLLECTION_SLUG_USER}/login`,
             {

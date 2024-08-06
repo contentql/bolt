@@ -1,10 +1,10 @@
-import BlogCard from './BlogCard'
-
+// import { Skeleton } from './common/Skeleton'
 // import { Blog } from '@payload-types'
+import BlogCard from './BlogCard'
 
 const list = [
   {
-    title: 'The Art of Storytelling in the Digital Age',
+    title: 'The Art of Storytelling',
     description:
       'Explore how storytelling has evolved with the rise of digital media. Discuss techniques for crafting compelling narratives across various platforms, including podcasts, blogs, and social media. Offer tips on engaging audiences through authentic and relatable stories.',
     poster:
@@ -47,11 +47,18 @@ const list = [
 
 const BlogSection = () => {
   return (
-    <div>
+    <div className='w-full'>
       <h3 className='mb-16 text-secondary'>Featured Posts</h3>
       <div className='grid gap-52 sm:gap-x-24 md:grid-cols-2 lg:grid-cols-3'>
         {list.map(details => (
           <BlogCard details={details} key={details.title} />
+          // <div className='space-y-3  grid w-full' key={details.title}>
+          //   <Skeleton className='h-256 w-full' />
+          //   <div className='space-y-16'>
+          //     <Skeleton className='h-4 w-[250px]' />
+          //     <Skeleton className='h-4 w-[200px]' />
+          //   </div>
+          // </div>
         ))}
       </div>
     </div>

@@ -16,11 +16,11 @@ const Footer = () => {
         </p>
 
         <div className='flex w-full items-center justify-between sm:justify-end sm:gap-8'>
-          <YoutubeLogo />
-          <TwitterLogo className='size-20' />
-          <FacebookLogo />
-          <LinkedinLogo />
-          <InstagramLogo className='size-28' />
+          <YoutubeLogo className='transition-colors hover:fill-text' />
+          <TwitterLogo className='size-20 transition-colors hover:fill-text' />
+          <FacebookLogo className='transition-colors hover:fill-text' />
+          <LinkedinLogo className='transition-colors hover:fill-text' />
+          <InstagramLogo className='size-28 transition-colors hover:fill-text' />
         </div>
       </Container>
     </footer>

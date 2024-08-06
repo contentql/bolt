@@ -1,31 +1,40 @@
 'use client'
 
-import { Input, LabelInputContainer } from '../common/fields'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { Alert, AlertDescription } from '@/components/common/Alert'
+import Button from '@/components/common/Button'
+import Container from '@/components/common/Container'
+import { Input } from '@/components/common/Input'
+
 import { generateResetPasswordToken, resetPassword } from './actions'
 
 const generateTokenSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required' })
+    .email({ message: 'Email is invalid' }),
 })
 
 const resetPasswordSchema = z.object({
   password: z
     .string()
+    .min(1, { message: 'Password is required' })
     .min(8, { message: 'Password must be at least 8 characters long' }),
   token: z.string(),
 })
 
 // Form component to request a password reset token
+// Sends reset password link to user email
 export function GenerateResetTokenForm() {
   const form = useForm<z.infer<typeof generateTokenSchema>>({
     resolver: zodResolver(generateTokenSchema),
     mode: 'onBlur',
-    defaultValues: { email: '' },
+    // defaultValues: { email: '' },
   })
   const {
     register,
@@ -53,69 +62,53 @@ export function GenerateResetTokenForm() {
   }
 
   return (
-    <main
-      id='content'
-      role='main'
-      className='flex min-h-screen w-full items-center justify-center bg-black'>
-      <div className='mx-auto w-full max-w-md rounded-none drop-shadow-2xl md:rounded-2xl md:p-8'>
-        <div className='text-center'>
-          <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
-            Forgot password?
-          </h1>
-          <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
-            Remember your password?
-            <a
-              className='pl-1 font-medium text-indigo-600 decoration-1 hover:underline'
-              href='/sign-in'>
-              SignIn here
-            </a>
-          </p>
-        </div>
+    <Container className='grid items-center'>
+      <Container className='max-w-lg'>
+        {message && (
+          <Alert variant='success' className='mb-12'>
+            <AlertDescription>{message}</AlertDescription>
+          </Alert>
+        )}
 
-        <div className='mt-10'>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='space-y-4'>
-              {message && <p className='text-red-500'>{message}</p>}
-              <div>
-                <LabelInputContainer className='mb-4'>
-                  <div className='inline-flex justify-between'>
-                    <label
-                      htmlFor='email'
-                      className='mb-2 ml-1 block text-sm font-bold dark:text-white'>
-                      Email address
-                    </label>
-                    {errors.email && (
-                      <p
-                        className='mt-2 hidden text-xs text-red-600'
-                        id='email-error'>
-                        {errors.email.message}
-                      </p>
-                    )}
-                  </div>
-                  <Input
-                    {...register('email')}
-                    type='email'
-                    id='email'
-                    name='email'
-                    placeholder='jon@gmail.com'
-                  />
-                </LabelInputContainer>
-              </div>
-              <button
-                type='submit'
-                disabled={isSubmitting}
-                className='mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50 dark:focus:ring-offset-gray-800'>
-                {isSubmitting ? 'Sending...' : 'Send Reset Link'}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </main>
+        <h1 className='mb-12 text-lg font-semibold md:text-xl'>
+          Reset your password
+        </h1>
+
+        <p className='text-secondary'>
+          Forgot your password? Please enter your email and we'll send you a
+          reset link
+        </p>
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='my-20 space-y-20 text-sm'>
+          <div className='space-y-4'>
+            <label htmlFor='email'>Email</label>
+
+            <Input
+              {...register('email')}
+              type='email'
+              id='email'
+              name='email'
+              placeholder='john.doe@example.com'
+            />
+
+            <p className='text-sm text-danger'>
+              {errors?.email?.message || ' '}
+            </p>
+          </div>
+
+          <Button type='submit' className='w-full' disabled={isSubmitting}>
+            {isSubmitting ? 'Sending Link...' : 'Send Reset Link'}
+          </Button>
+        </form>
+      </Container>
+    </Container>
   )
 }
 
 // Form component to reset the password using the provided token
+// This is to reset the password
 export function ResetPasswordForm({ token }: { token: string }) {
   const router = useRouter()
   const form = useForm({
@@ -150,56 +143,46 @@ export function ResetPasswordForm({ token }: { token: string }) {
   }
 
   return (
-    <main className='flex h-screen w-full items-center justify-center bg-black'>
-      <div className='w-full max-w-md rounded-none drop-shadow-2xl md:rounded-2xl md:p-8'>
-        <div className='text-center'>
-          <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
-            Almost there!
-          </h1>
-          <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
-            Please enter a new password to reset.
-          </p>
-        </div>
+    <Container className='grid items-center'>
+      <Container className='max-w-lg'>
+        {message && (
+          <Alert variant='success' className='mb-12'>
+            <AlertDescription>{message}</AlertDescription>
+          </Alert>
+        )}
 
-        <div className='mt-10'>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='space-y-4'>
-              {message && <p className='text-green-500'>{message}</p>}
-              <div>
-                <LabelInputContainer className='mb-4'>
-                  <div className='inline-flex justify-between'>
-                    <label
-                      htmlFor='password'
-                      className='mb-2 ml-1 block text-sm font-bold dark:text-white'>
-                      Enter password
-                    </label>
-                    {errors.password && (
-                      <p
-                        className='mt-2 hidden text-xs text-red-600'
-                        id='email-error'>
-                        {errors.password.message}
-                      </p>
-                    )}
-                  </div>
-                  <Input
-                    {...register('password')}
-                    type='password'
-                    id='password'
-                    name='password'
-                    placeholder='● ● ● ● ● ● ● ●'
-                  />
-                </LabelInputContainer>
-              </div>
-              <button
-                type='submit'
-                disabled={isSubmitting}
-                className='mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50 dark:focus:ring-offset-gray-800'>
-                {isSubmitting ? 'Processing...' : 'Reset Password'}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </main>
+        <h1 className='mb-12 text-lg font-semibold md:text-xl'>
+          Create new password
+        </h1>
+
+        <p className='text-secondary'>
+          Please choose a new password, Must be at least
+        </p>
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='my-20 space-y-20 text-sm'>
+          <div className='space-y-4'>
+            <label htmlFor='password'>Password</label>
+
+            <Input
+              {...register('password')}
+              type='password'
+              id='password'
+              name='password'
+              placeholder='Enter new password'
+            />
+
+            <p className='text-sm text-danger'>
+              {errors?.password?.message || ' '}
+            </p>
+          </div>
+
+          <Button type='submit' className='w-full' disabled={isSubmitting}>
+            {isSubmitting ? 'Processing...' : 'Reset password'}
+          </Button>
+        </form>
+      </Container>
+    </Container>
   )
 }

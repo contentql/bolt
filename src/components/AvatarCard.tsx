@@ -16,7 +16,7 @@ const AvatarCard = ({
   description,
 }: AvatarCardType) => {
   return (
-    <div className='flex w-max flex-col items-center gap-12'>
+    <div className='flex flex-col items-center gap-12'>
       <Avatar className='size-128'>
         <AvatarImage src={profileUrl} />
         <AvatarFallback>B</AvatarFallback>

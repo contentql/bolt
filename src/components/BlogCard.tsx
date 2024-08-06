@@ -18,8 +18,8 @@ type BlogCardType = {
 
 const BlogCard = ({ details }: { details: BlogCardType }) => {
   return (
-    <div className='grid gap-16'>
-      <div className='rounded relative h-256 w-full overflow-hidden bg-secondary'>
+    <div className='space-y-16'>
+      <div className='relative h-256 w-full overflow-hidden rounded bg-secondary'>
         <Image
           src={details.poster}
           fill

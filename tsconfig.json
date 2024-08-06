@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"],
+      "@payload-config": ["./payload.config.ts"],
+      "@payload-types": ["./payload-types.ts"],
+      "@env": ["./env.ts"],
+      // "@blocks/*": ["./src/blocks/pin-hcms-blocks/*"]
+      "@node_modules/*": ["node_modules/*"]
+    },
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/lib/authjs-payload-adapter/types/next-auth.d.ts"
+  ],
+  "exclude": ["node_modules"]
+}

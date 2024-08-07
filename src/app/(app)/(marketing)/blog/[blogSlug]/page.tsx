@@ -1,5 +1,11 @@
 // import { Blog } from '@payload-types'
 // import { Metadata } from 'next'
+import { AvatarImage } from '@radix-ui/react-avatar'
+import { format } from 'date-fns'
+import Image from 'next/image'
+import { HiOutlineBookOpen } from 'react-icons/hi'
+
+import { Avatar, AvatarFallback } from '@/components/common/Avatar'
 import Container from '@/components/common/Container'
 
 // import BlogPostView from '@/components/marketing/blog/BlogPost'
@@ -64,9 +70,43 @@ import Container from '@/components/common/Container'
 const Page = () => {
   return (
     <Container className='max-w-2xl'>
-      <article className='prose-img:rounded prose text-base dark:prose-invert prose-headings:text-primary prose-img:max-h-320 prose-img:w-full prose-img:object-cover'>
-        <img src='https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' />
-        <h2>Let's check how it's coming</h2>
+      <div className='mb-32 space-y-16'>
+        <div className='relative min-h-320 w-full'>
+          <Image
+            src='https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            alt=''
+            fill
+            className='h-full w-full rounded object-cover'
+          />
+        </div>
+
+        <h1 className='text-lg font-semibold md:text-xl'>
+          Easy real-time notifications with Supabase Realtime
+        </h1>
+
+        <div className='flex w-full justify-between'>
+          <div className='flex items-center gap-12'>
+            <Avatar>
+              <AvatarImage src='' />
+              <AvatarFallback className='text-sm'>CN</AvatarFallback>
+            </Avatar>
+
+            <div className='flex flex-col gap-2'>
+              <span className='text-sm'>Bolt</span>
+              <span className='text-sm text-secondary'>
+                {format(new Date(), 'LLL io, yyyy')}
+              </span>
+            </div>
+          </div>
+
+          <span className='flex items-center gap-4 text-sm text-secondary'>
+            <HiOutlineBookOpen className='text-base' />
+            10 min read
+          </span>
+        </div>
+      </div>
+
+      <article className='prose text-base dark:prose-invert prose-headings:text-primary prose-img:max-h-320 prose-img:w-full prose-img:rounded prose-img:object-cover'>
         <p>
           Waste management involves collecting, transporting, processing, and
           disposing of waste materials. It’s crucial for keeping our environment

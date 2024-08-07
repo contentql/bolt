@@ -33,7 +33,8 @@ const BlogCard = ({ details }: { details: BlogCardType }) => {
       <div className='flex flex-col gap-12 md:self-center'>
         <Link
           href='/blog'
-          className='line-clamp-2 text-lg font-semibold transition-colors hover:text-primary'>
+          className='line-clamp-2 text-lg font-semibold transition-colors hover:text-primary'
+          title={details.title}>
           {details.title}
         </Link>
 
@@ -54,7 +55,7 @@ const BlogCard = ({ details }: { details: BlogCardType }) => {
             <AvatarFallback className='text-sm'>CN</AvatarFallback>
           </Avatar>
 
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-2'>
             <span className='text-sm'>{details.user.name}</span>
             <span className='text-sm text-secondary'>
               {format(new Date(), 'LLL io, yyyy')}

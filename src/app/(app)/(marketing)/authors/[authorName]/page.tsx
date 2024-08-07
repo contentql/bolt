@@ -2,6 +2,7 @@
 import AvatarCard from '@/components/AvatarCard'
 import BlogSection from '@/components/BlogSection'
 import {
+  FacebookLogo,
   InstagramLogo,
   LinkedinLogo,
   TwitterLogo,
@@ -60,6 +61,11 @@ const Author = async () => {
 
           <Button variant='secondary' className='items-center gap-8'>
             <LinkedinLogo />
+            Bolt
+          </Button>
+
+          <Button variant='secondary' className='items-center gap-8'>
+            <FacebookLogo />
             Bolt
           </Button>
         </div>

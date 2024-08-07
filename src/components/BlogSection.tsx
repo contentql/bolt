@@ -1,6 +1,7 @@
-// import { Skeleton } from './common/Skeleton'
+import { Skeleton } from './common/Skeleton'
+
 // import { Blog } from '@payload-types'
-import BlogCard from './BlogCard'
+// import BlogCard from './BlogCard'
 
 const list = [
   {
@@ -51,14 +52,14 @@ const BlogSection = () => {
       <h3 className='mb-16 text-secondary'>Featured Posts</h3>
       <div className='grid gap-52 sm:gap-x-24 md:grid-cols-2 lg:grid-cols-3'>
         {list.map(details => (
-          <BlogCard details={details} key={details.title} />
-          // <div className='space-y-3  grid w-full' key={details.title}>
-          //   <Skeleton className='h-256 w-full' />
-          //   <div className='space-y-16'>
-          //     <Skeleton className='h-4 w-[250px]' />
-          //     <Skeleton className='h-4 w-[200px]' />
-          //   </div>
-          // </div>
+          // <BlogCard details={details} key={details.title} />
+          <div className='grid  w-full space-y-12' key={details.title}>
+            <Skeleton className='h-256 w-full' />
+            <div className='space-y-12'>
+              <Skeleton className='h-16 w-[250px]' />
+              <Skeleton className='h-16 w-[200px]' />
+            </div>
+          </div>
         ))}
       </div>
     </div>

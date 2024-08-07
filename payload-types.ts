@@ -174,7 +174,7 @@ export interface Page {
   id: string;
   title: string;
   isHome?: boolean | null;
-  blocks?: TestType[] | null;
+  blocks?: (TestType | HeroType)[] | null;
   slug?: string | null;
   path?: string | null;
   parent?: (string | null) | Page;
@@ -200,6 +200,18 @@ export interface TestType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Test';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroType".
+ */
+export interface HeroType {
+  heading: string;
+  subHeading: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'HeroSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

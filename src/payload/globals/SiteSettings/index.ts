@@ -40,10 +40,10 @@ const menuItemsField = (
 
 export const siteSettings: GlobalConfig = {
   slug: GLOBAL_SETTINGS_SLUG,
-  // access: {
-  //   read: isAdminOrCurrentUser,
-  //   update: isAdmin,
-  // },
+  access: {
+    read: () => true,
+    // update: isAdmin,
+  },
   hooks: {
     afterChange: [async () => revalidateTag('site-settings')],
   },

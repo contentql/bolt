@@ -1,5 +1,7 @@
 'use client'
 
+import { SiteSetting } from '@payload-types'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -25,14 +27,25 @@ const links = [
   },
 ]
 
-const Navbar = () => {
+const Navbar = ({ data }: { data: SiteSetting }) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+
+  const imageURL =
+    typeof data.header?.logo_image !== 'string' && data.header?.logo_image
+      ? data.header.logo_image.url
+      : ''
 
   return (
     <header className='fixed top-0 z-10 w-full bg-card'>
       <Container className='flex h-48 items-center justify-between'>
-        <Link href='/'>⚡Bolt</Link>
+        <Link href='/'>
+          {imageURL ? (
+            <Image src={imageURL} alt='' height={20} width={20} />
+          ) : (
+            'Bolt'
+          )}
+        </Link>
 
         <div
           className={`transition-[visibility] ${open ? 'visible' : 'invisible duration-500'}`}>

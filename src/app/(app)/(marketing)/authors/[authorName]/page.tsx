@@ -1,14 +1,7 @@
 // import { User } from '@payload-types'
 import AvatarCard from '@/components/AvatarCard'
 import BlogSection from '@/components/BlogSection'
-import {
-  FacebookLogo,
-  InstagramLogo,
-  LinkedinLogo,
-  TwitterLogo,
-  YoutubeLogo,
-} from '@/components/SVG'
-import Button from '@/components/common/Button'
+import SocialLinks from '@/components/SocialLinks'
 import Container from '@/components/common/Container'
 
 // import AuthorPostsView from '@/components/marketing/author/BlogsByAuthorAndTag'
@@ -43,32 +36,7 @@ const Author = async () => {
           description='Bolt is a talented writer whose work has gained recognition from both critics and readers.'
         />
 
-        <div className='flex flex-wrap items-center justify-center gap-12'>
-          <Button variant='secondary' className='items-center gap-8'>
-            <TwitterLogo />
-            Bolt
-          </Button>
-
-          <Button variant='secondary' className='items-center gap-8'>
-            <InstagramLogo />
-            Bolt
-          </Button>
-
-          <Button variant='secondary' className='items-center gap-8'>
-            <YoutubeLogo />
-            Bolt
-          </Button>
-
-          <Button variant='secondary' className='items-center gap-8'>
-            <LinkedinLogo />
-            Bolt
-          </Button>
-
-          <Button variant='secondary' className='items-center gap-8'>
-            <FacebookLogo />
-            Bolt
-          </Button>
-        </div>
+        <SocialLinks />
       </div>
 
       <BlogSection />

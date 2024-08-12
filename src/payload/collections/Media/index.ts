@@ -39,6 +39,9 @@ export const Media: CollectionConfig = {
       name: 'alt',
       label: 'Alt Text',
       type: 'text',
+      admin: {
+        description: 'Add alt text for better SEO',
+      },
     },
 
     // The following fields should be able to be merged in to default upload fields
